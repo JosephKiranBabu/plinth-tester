@@ -5,6 +5,7 @@ $ sudo apt install python3-pytest
 $ pip3 install splinter
 $ pip3 install pytest-splinter
 $ pip3 install pytest-bdd
+$ sudo apt install xvfb  # optional, to avoid opening browser windows
 $ pip3 install pytest-xvfb  # optional, to avoid opening browser windows
 ```
 
@@ -48,4 +49,11 @@ can also specify which tests to run, by tag or keyword:
 
 ```
 $ py.test -k essential
+```
+
+If xvfb is installed and you still want to see browser windows, use the 
+`--no-xvfb` command-line argument.
+
+```
+$ py.test --no-xvfb -k mediawiki
 ```
