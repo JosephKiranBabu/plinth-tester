@@ -32,7 +32,7 @@ the host system at https://localhost:4430/.
 Create a new user as follows:
 
 * Username: tester
-* Password: tester@123
+* Password: testingtesting
 
 This step is optional if a fresh install of Plinth is being
 tested. Plinth-tester will create the required user using Plinth's
