@@ -17,7 +17,6 @@
 
 from .interface import nav_to_module, submit
 
-
 config_page_title_language_map = {
     'da': 'Generel Konfiguration',
     'de': 'Allgemeine Konfiguration',
@@ -69,3 +68,10 @@ def set_language(browser, language_code):
 def check_language(browser, language_code):
     nav_to_module(browser, 'config')
     return browser.title == config_page_title_language_map[language_code]
+
+
+def create_admin_account(browser, username, password):
+    browser.find_by_id('id_username').fill(username)
+    browser.find_by_id('id_password1').fill(password)
+    browser.find_by_id('id_password2').fill(password)
+    browser.find_by_value('Create Account').click()

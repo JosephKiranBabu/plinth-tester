@@ -15,10 +15,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from pytest_bdd import parsers, when, then
+from pytest_bdd import parsers, then, when
 
 from support import system
-
 
 language_codes = {
     'Danish': 'da',
@@ -54,14 +53,19 @@ def change_language(browser, language):
 
 @then(parsers.parse('the hostname should be {hostname:w}'))
 def hostname_should_be(browser, hostname):
-    assert(system.get_hostname(browser) == hostname)
+    assert system.get_hostname(browser) == hostname
 
 
 @then(parsers.parse('the domain name should be {domain:w}'))
 def domain_name_should_be(browser, domain):
-    assert(system.get_domain_name(browser) == domain)
+    assert system.get_domain_name(browser) == domain
 
 
 @then('Plinth language should be <language>')
 def plinth_language_should_be(browser, language):
-    assert(system.check_language(browser, language_codes[language]))
+    assert system.check_language(browser, language_codes[language])
+
+
+@when("I create an administrator account")
+def create_admin_account(browser):
+    system.create_admin_account(browser, 'tester', 'testingtesting')

@@ -15,21 +15,48 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from pytest_bdd import parsers, given, when, then
+from pytest_bdd import given, parsers, then, when
 
 from support import config, interface
 
 
+default_url = config['DEFAULT']['url']
+
+
+@given("I am on the firstboot welcome page")
+def nav_to_firstboot_welcome(browser):
+    browser.visit(default_url + '/plinth/firstboot/welcome')
+
+
+@when("I click on start setup")
+def first_boot_setup(browser):
+    browser.find_by_value('Start Setup').click()
+
+
+@then("I should be taken to the firstboot complete page")
+def firstboot_complete_page(browser):
+    assert browser.url == default_url + '/plinth/firstboot/complete/'
+
+
+@then("I should be taken to the firstboot page")
+def firstboot_page(browser):
+    assert browser.url == default_url + '/plinth/users/firstboot/'
+
+
+@given("I am on the firstboot page")
+def nav_to_firstboot(browser):
+    browser.visit(default_url + '/plinth/users/firstboot')
+
+
 @given("I'm a logged in user")
 def logged_in_user(browser):
-    interface.login(browser, config['DEFAULT']['url'],
-                    config['DEFAULT']['username'],
+    interface.login(browser, default_url, config['DEFAULT']['username'],
                     config['DEFAULT']['password'])
 
 
 @given("I'm a logged out user")
 def logged_out_user(browser):
-    browser.visit(config['DEFAULT']['url'] + '/plinth/accounts/logout/')
+    browser.visit(default_url + '/plinth/accounts/logout/')
 
 
 @then(parsers.parse('I should be prompted for login'))

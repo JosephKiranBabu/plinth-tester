@@ -15,21 +15,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-@sso @essential @system
-Feature: Single Sign On
-  Test Single Sign On features.
+@first-boot @setup
+Feature: First Boot
+  Setup a new FreedomBox installation and create an admin user.
 
-Background:
-  Given I'm a logged in user
-  Given the syncthing application is installed
-  Given the syncthing application is enabled
+Scenario: Start Setup
+  Given I am on the firstboot welcome page
+  When I click on start setup
+  Then I should be taken to the firstboot page
 
-
-Scenario: Logged out Plinth user cannot access Syncthing web interface
-  Given I'm a logged out user
-  When I access syncthing application
-  Then I should be prompted for login
-
-Scenario: Logged in Plinth user can access Syncthing web interface
-  When I access syncthing application
-  Then the syncthing site should be available
+Scenario: Create Administrator Account
+  Given I am on the firstboot page
+  When I create an administrator account
+  Then I should be taken to the firstboot complete page
